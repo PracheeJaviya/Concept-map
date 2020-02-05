@@ -1,0 +1,137 @@
+digraph "Nuclear accident" {
+    label="Probabilistic Analysis: Risk of major nuclear accidents";
+    labelloc="t";
+	"radio-root" [label="Radioactivity"];
+	Accidents [label="Accidents"];
+	Prob [label="Probabilistic Models"];
+    "radio-root" -> Curie [label="unit"];
+    "radio-root" -> Becquerel [label="unit"];
+    Curie -> Becquerel [label="1 Cu = 3.7x10^10 Bq"];
+    AN [label="Atomic Number"];
+    HV [label="Radioactive\nSamples"];
+
+    Cesium -> AN [label=56];
+    Radium -> AN [label=88];
+    Thorium -> AN [label=90];
+
+    HV -> {
+        Cesium;
+        Radium;
+        Thorium;
+    }
+
+    HV -> Isotopes [label="have"];
+
+    alpha [label="&alpha; particles"];
+    beta [label="&beta; particles"];
+    gamma [label="&gamma; particles"];
+
+    ES [label="Excited\nState"];
+    Isotopes ->  ES [label="in their"];
+
+    GC [label="Geiger counter"];
+    Radiation -> GC [label="measured with"];
+
+    CPM [label="Counts per minute"];
+    GC -> CPM [label="unit"];
+
+    Decay -> beta [label="into"];
+    Decay -> gamma [label="into"];
+    Decay -> alpha [label="into"];
+    GC -> alpha [label="counts"];
+    GC -> beta [label="counts"];
+    GC -> gamma [label="counts"];
+
+    ES -> Decay;
+    HL [label="half-life (&tau;)"];
+    HV -> HL [label="after"];
+    HLFormula [label="Half Life Formula"];
+    HL -> HLFormula;
+
+    DC [label="Decay Constant"];
+    DC -> HL [label="inversely proportional"];
+    HV -> DC [label="have"];
+
+    PE [label="Power excursion"];
+    Accidents -> PE;
+
+    LOPC [label="Loss of\nPressure Control"];
+    Accidents -> LOPC;
+    LOPC -> Fukushima;
+
+    CoreMeltdown [label="Core Meltdown"];
+    Accidents -> CoreMeltdown [label="caused due to"];
+
+    CoreMeltdown -> Chernobyl [label="at"];
+
+    LOCA [label="Loss of\nCoolant Accident"];
+    Accidents -> LOCA;
+    Accidents -> Radiation;
+    Accidents -> Loss [label="leads to"];
+
+    Loss -> {
+        Land;
+        Economy;
+        Humans;
+    }
+
+    Cancer [label="Fatal Cancer"];
+    Humans -> Cancer;
+    GenDis [label="Genetic Disorders"];
+    Humans -> GenDis;
+    DNATransmutation [label="Transmutation of DNA"];
+    GenDis -> DNATransmutation;
+
+    PS [label="Person sieverts"];
+    Radiation -> PS [label="Collective\ndose (unit)"];
+
+    InPlGr [label="Inhibits plant growth"];
+    Land -> InPlGr [label="contamination"];
+
+    Fukushima -> Economy [label="$100B"];
+
+    NIED [label="National Research Institute for\nEarth Science and Disaster Prevention"];
+    Prob -> NIED;
+    NIED -> Fukushima [label="Estimated Earthquakes for"];
+
+    Prob -> Divergence [label="calculates"];
+
+    ObFreq [label="Observed\nFrequency"];
+    CalProb [label="Calculated\nProbability"];
+
+    Divergence -> ObFreq;
+    Divergence -> CalProb [label="between"];
+
+    Bias [label="Biases in perception\nof Probability"];
+    CalProb -> Bias;
+
+    Cancer -> "8 lakh deaths";
+
+    Bayes [label="Bayes Laplace Rule"];
+    Prob -> Bayes;
+
+    Condprob [label="Conditional\nProbability"];
+    Bayes -> Condprob;
+
+    Bias -> Condprob [label="using"];
+
+    Ratio [label="Deduction of\nStatistical Ratio"];
+    Condprob -> Ratio;
+
+    Radiation -> "Decay Rate" [label="Activity (A)"];
+    "Decay Rate" -> Curie;
+
+    Radiation -> "Ionisation\nin Air" [label="Exposure (X)"];
+    Radiation -> "Energy\nAbsorption" [label="Absorbed Dose (D)"];
+    Radiation -> "Radiological\nEffectiveness" [label="Dose Equivalent (DE)"];
+
+    lorentz [label="Lorentz\nDistribution"];
+    gamma -> lorentz [label="Rays"];
+
+    lorentz -> {
+        Normalized;
+        Unnormalized;
+    }
+
+    Unnormalized -> "Spread of\ndetected energies" [label="shows"];
+}
