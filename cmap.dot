@@ -128,10 +128,21 @@ digraph "Nuclear accident" {
     lorentz [label="Lorentz\nDistribution"];
     gamma -> lorentz [label="Rays"];
 
+    BWD [label="Breit-Wigner\nDistribution"];
+
     lorentz -> {
+        BWD;
         Normalized;
         Unnormalized;
     }
 
+    BWD -> "Cross-Section";
+    "Cross-Section" -> "Reaction-Rates";
+
+    BWD -> "Gamow Peak";
+    "Gamow Peak" -> "Resonance\nEnergy E_r";
+
+    "Reaction-Rates" -> HL;
+    
     Unnormalized -> "Spread of\ndetected energies" [label="shows"];
 }
